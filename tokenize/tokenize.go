@@ -146,6 +146,20 @@ func consumeNumber() (string, bool) {
 	return s, isFloat
 }
 
+func consumeWhite() string {
+	var s string
+	for isNotEof() {
+		if userInput[wat] == ' ' || userInput[wat] == '\t' {
+			s += string(userInput[wat])
+			lat++
+			wat++
+		} else {
+			break
+		}
+	}
+	return s
+}
+
 func Tokenize(input string) (*Token, error) {
 	// init
 	userInput = []rune(input)
@@ -158,9 +172,10 @@ func Tokenize(input string) (*Token, error) {
 inputLoop:
 	for isNotEof() {
 		// white
-		if userInput[wat] == ' ' {
-			lat++
-			wat++
+		if userInput[wat] == ' ' || userInput[wat] == '\t' {
+			pos := NewPosition(lno, lat, wat)
+			s := consumeWhite()
+			cur = NewWhite(cur, s, pos)
 			continue
 		}
 		// newline

@@ -249,6 +249,12 @@ func NewNL(cur *Token, raw string, pos *Position) *Token {
 	return tok
 }
 
+func NewWhite(cur *Token, raw string, pos *Position) *Token {
+	tok := NewToken(TKWhite, raw, pos)
+	cur.Next = tok
+	return tok
+}
+
 func NewComment(cur *Token, raw string, pos *Position) *Token {
 	tok := NewToken(TKComment, raw, pos)
 	cur.Next = tok

@@ -9,6 +9,7 @@ const (
 	TKEof
 
 	TKNewLine
+	TKWhite
 	TKComment
 
 	TKIdent
